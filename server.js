@@ -3,7 +3,7 @@ var exec = require('child_process').exec;
 
 var connections = 0;
 var newconnections = 0;
-
+var n = 0;
 var getCpuCommand = "ps -p " + process.pid + " -u | grep " + process.pid;
 
 socket.set('log level', 1);
@@ -30,11 +30,13 @@ setInterval(function() {
 	    var memory = s[3];
 
 	    var l = [
-	      'N: ' + newconnections,
-	      'C: ' + connections,
-	      'CPU: ' + cpu,
-	      'Mem: ' + memory
+	    	n,
+	    	'N: ' + newconnections,
+	    	'C: ' + connections,
+	    	'CPU: ' + cpu,
+	    	'Mem: ' + memory
 	    ];
+	    n++;
 	    newconnections = 0;
 	    console.log(l.join(',\t'));
 	  });
