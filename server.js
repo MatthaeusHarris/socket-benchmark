@@ -1,4 +1,6 @@
 var socket = require('socket.io').listen(8888);
+var exec = require('child_process').exec;
+
 var connections = 0;
 var newconnections = 0;
 
