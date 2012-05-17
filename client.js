@@ -2,13 +2,17 @@ var io = require('socket.io-client');
 var connections = 0;
 var index = 0;
 
-function user(host, port) {
+function user(host, port, chainlimit) {
 	console.log("Attempting to open connection number " + index++);
 	var socket = io.connect('http://' + host + ':' + port, {'force new connection': true});
 	socket.on('connect', function() {
 		connections++;
 		console.log(connections);
 		socket.send("This is a test.  This is only a test.");
+		if (chainlimit) {
+			user(host, port, chainlimit-1);
+			console.log("Chaining " + chainlimit);
+		}
 	});
 
 	socket.on('message', function(message) {
@@ -21,11 +25,18 @@ function user(host, port) {
 		socket.disconnect(); 
 		connections--;
 		console.log(connections);
-	}, 90000);
+	}, 15*60*1000);
 }
 
+/*
 for (var i=0; i<2000; i++) {
 	setTimeout(function() { 
-		user(process.argv[2], process.argv[3]);
-	}, i*10);
+		user(process.argv[2], process.argv[3], 0);
+	}, i*75);
 }
+//*/
+user(process.argv[2], process.argv[3], 500);
+user(process.argv[2], process.argv[3], 500);
+user(process.argv[2], process.argv[3], 500);
+user(process.argv[2], process.argv[3], 500);
+user(process.argv[2], process.argv[3], 500);
