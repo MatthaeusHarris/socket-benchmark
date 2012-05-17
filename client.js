@@ -1,7 +1,9 @@
 var io = require('socket.io-client');
 var connections = 0;
+var index = 0;
 
 function user(host, port) {
+	console.log("Attempting to open connection number " + index++);
 	var socket = io.connect('http://' + host + ':' + port, {'force new connection': true});
 	socket.on('connect', function() {
 		connections++;
@@ -10,7 +12,8 @@ function user(host, port) {
 	});
 
 	socket.on('message', function(message) {
-		socket.send(message);
+//		console.log(message);
+//		socket.send(message);
 		//socket.disconnect();
 	});
 
@@ -21,8 +24,8 @@ function user(host, port) {
 	}, 90000);
 }
 
-for (var i=0; i<200; i++) {
+for (var i=0; i<2000; i++) {
 	setTimeout(function() { 
-		user('localhost',8888); 
-	}, i*20);
+		user(process.argv[2], process.argv[3]);
+	}, i*10);
 }
