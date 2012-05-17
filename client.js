@@ -35,8 +35,8 @@ for (var i=0; i<2000; i++) {
 	}, i*75);
 }
 //*/
-user(process.argv[2], process.argv[3], 500);
-user(process.argv[2], process.argv[3], 500);
-user(process.argv[2], process.argv[3], 500);
-user(process.argv[2], process.argv[3], 500);
-user(process.argv[2], process.argv[3], 500);
+user(process.argv[2], process.argv[3], process.argv[4]);
+user(process.argv[2], process.argv[3], process.argv[4]);
+user(process.argv[2], process.argv[3], process.argv[4]);
+user(process.argv[2], process.argv[3], process.argv[4]);
+user(process.argv[2], process.argv[3], process.argv[4]);
